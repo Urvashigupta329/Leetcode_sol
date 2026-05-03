@@ -1,0 +1,21 @@
+class Solution {
+    public int romanToInt(String s) {
+        String symbols = "IVXLCDM";
+        int[] values = {1, 5, 10, 50, 100, 500, 1000};
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < values.length; i++) {
+            map.put(symbols.charAt(i), values[i]);
+        }
+
+        int result = map.get(s.charAt(s.length() - 1));
+
+        for (int i = 0; i < s.length() - 1; i++) {
+            boolean sign = map.get(s.charAt(i))  < map.get(s.charAt(i + 1));
+
+            result += ((sign ? -1 : 1) * map.get(s.charAt(i)));
+        }
+
+        return result;
+    }
+}
